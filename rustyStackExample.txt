@@ -1,0 +1,7 @@
+rustyStack, which creates and maniuplates a stack data structure, produces the following output
+
+stack of length: 3
+3, 2, 1, Nil
+
+stack of length: 1
+1
