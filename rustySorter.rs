@@ -5,10 +5,27 @@ use rand::Rng;
 use time::PreciseTime;
 
 fn main() {
+    use std::io;
+
+    println!("How many test cases would you like to run?");
+
+    let mut input = String::new();
+
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line!");
+
+    let input: i32 = input
+        .trim()
+        .parse()
+        .expect("Non-integer input detected. Exiting program.");
+
     {
+        println!("=== SORTING WITH MERGE SORT ===");
+
         let mut times: Vec<time::Duration> = vec![];
 
-        for j in 1..2 {
+        for j in 1..(input + 1) {
             let start = PreciseTime::now();
             let mut rng = rand::thread_rng();
             let mut vector: Vec<i32> = vec![];
@@ -17,63 +34,65 @@ fn main() {
                     vector.push(rng.gen_range(i32::min_value(), i32::max_value()));
                 }
 
-            println!("SORTING LIST OF {} ELEMENTS", 10000 * j);
+            println!("CASE {}: SORTING LIST OF {} ELEMENTS", j, 10000 * j);
 
             merge_sort(&mut vector);
             assert!(is_sorted(&mut vector));
 
-            for k in &vector
+            /*for k in &vector
                 {
                     println!("{}", k);
-                }
+                }*/
 
             let end = PreciseTime::now();
             println!("LIST SORTED IN {} SECONDS\n", start.to(end));
             times.push(start.to(end));
         }
 
-        println!(" === SORTING TIMES === ");
+        println!(" === SORTING TIMES (MERGE SORT) === ");
 
-        for i in 1..11
+        for i in 1..(input + 1)
             {
-                println!("CASE {}: \t {}", i, times[i-1]);
+                println!("CASE {}: \t {} SECONDS", i, times[(i-1) as usize]);
             }
 
         println!("")
     }
 
     {
+        println!("=== SORTING WITH INSERTION SORT ===");
+
         let mut times: Vec<time::Duration> = vec![];
 
-        for j in 1..11 {
+        for j in 1..(input + 1) {
             let start = PreciseTime::now();
             let mut rng = rand::thread_rng();
             let mut vector: Vec<i32> = vec![];
-            for _ in 1..10 * j
+            for _ in 1..10000 * j
                 {
                     vector.push(rng.gen_range(i32::min_value(), i32::max_value()));
                 }
 
-            println!("SORTING LIST OF {} ELEMENTS", 10000 * j);
+            println!("CASE {}: SORTING LIST OF {} ELEMENTS", j, 10000 * j);
 
-            merge_sort(&mut vector);
+            insertion_sort(&mut vector);
             assert!(is_sorted(&mut vector));
 
-            for k in &vector
+            /*for k in &vector
                 {
                     println!("{}", k);
-                }
+                }*/
 
             let end = PreciseTime::now();
             println!("LIST SORTED IN {} SECONDS\n", start.to(end));
             times.push(start.to(end));
         }
 
-        println!(" === SORTING TIMES === ");
+        println!(" === SORTING TIMES (INSERTION SORT) === ");
 
-        for i in 1..11
+        for i in 1..(input + 1)
             {
-                println!("CASE {}: \t {}", i, times[i-1]);
+                println!("CASE {}: \t {} SECONDS", i, times[(i-1) as usize]);
             }
 
         println!("");
@@ -154,3 +173,4 @@ fn is_sorted(vec: &mut Vec<i32>) -> bool
     }
     true
 }
+
