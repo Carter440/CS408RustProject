@@ -1,0 +1,22 @@
+A few test cases for a prime factorizer program. First, the program prompts the user with "Enter your number here:".
+After the user enters a number, the program will return the prime factors.
+In this example, the program factorizes 9, 45, 372, 28394738, and 128372943.
+When the user types "exit", the program will panic and exit, telling the user, "Non-integer input detected. Exiting program."
+
+Enter your number here: 
+9
+3, 3
+Enter your number here: 
+45
+3, 3, 5
+Enter your number here: 
+372
+2, 2, 3, 31
+Enter your number here: 
+28394738
+2, 89, 159521
+Enter your number here: 
+128372943
+3, 37, 53, 21821
+Enter your number here: 
+exit
